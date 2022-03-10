@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-react";
-import { ButtonContainer, Controls } from "./style";
+import { ButtonContainer, Controls, Btn } from "./style";
 import { useClient } from "../../config";
 
 interface VideoControllerProps {
@@ -50,15 +50,13 @@ const VideoController = ({
   return (
     <ButtonContainer>
       <Controls>
-        <button onClick={() => mute("audio")}>
-          {trackState.audio ? <FaMicrophone /> : <FaMicrophoneSlash />}
-        </button>
-        <button onClick={() => mute("video")}>
-          {trackState.video ? <FaVideo /> : <FaVideoSlash />}
-        </button>
-        <button onClick={() => leaveChannel()}>
-          <MdOutlineExitToApp />
-        </button>
+        <Btn onClick={() => mute("audio")}>
+          {trackState.audio ? "오디오 On" : "오디오 Off"}
+        </Btn>
+        <Btn onClick={() => mute("video")}>
+          {trackState.video ? "비디오 On" : "비디오 Off"}
+        </Btn>
+        <Btn onClick={() => leaveChannel()}>나가기</Btn>
       </Controls>
     </ButtonContainer>
   );

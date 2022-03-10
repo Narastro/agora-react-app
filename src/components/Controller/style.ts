@@ -1,23 +1,17 @@
 import styled, { css } from "styled-components";
 
-export const ButtonContainer = styled.div`
-  position: relative;
-`;
+export const ButtonContainer = styled.div``;
 export const Controls = styled.div`
-  position: fixed;
+  position: absolute;
+  bottom: -30px;
+  left: 1vw;
   display: flex;
-  justify-contents: center;
-  align-items: center;
-  bottom: 1rem;
-  left: 29rem;
-  right: 0;
+  justify-contents: flex-start;
 `;
-
-export const Getout = styled.div`
-  position: fixed;
-  display: flex;
-  justify-contents: center;
-  align-items: center;
-  top: 1rem;
-  right: 1rem;
+export const Btn = styled.div`
+  cursor: pointer;
+  margin: 2px;
+  background-color: gray;
+  padding: 5px;
+  color: white;
 `;
