@@ -1,6 +1,13 @@
-import create from "zustand/react";
+import create from "zustand";
 
-export const useStore = create((set) => ({
+interface mediaState {
+  video: boolean;
+  audio: boolean;
+  toggleVideo: () => void;
+  toggleAudio: () => void;
+}
+
+export const useStore = create<mediaState>((set) => ({
   video: false,
   audio: false,
   toggleVideo: () => set((state) => ({ video: !state.video })),

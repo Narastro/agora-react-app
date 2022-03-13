@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
+import { useStore } from "../../stores/useStore";
 import {
   FaMicrophone,
   FaMicrophoneSlash,
@@ -22,20 +23,16 @@ const VideoController = ({
   uuid,
 }: VideoControllerProps): JSX.Element => {
   const client = useClient();
-  const [trackState, setTrackState] = useState({ video: false, audio: false });
+  const { audio, video, toggleVideo, toggleAudio } = useStore();
 
   const mute = async (type: "audio" | "video") => {
     if (type === "audio") {
-      await tracks[0].setEnabled(!trackState.audio);
-      setTrackState((ps) => {
-        return { ...ps, audio: !ps.audio };
-      });
+      await tracks[0].setEnabled(!audio);
+      toggleAudio();
     } else if (type === "video") {
-      await tracks[1].setEnabled(!trackState.video);
-      setTrackState((ps) => {
-        return { ...ps, video: !ps.video };
-      });
-      if (trackState.video) await client.publish(tracks[1]);
+      await tracks[1].setEnabled(!video);
+      toggleVideo();
+      if (video) await client.publish(tracks[1]);
     }
   };
 
@@ -51,12 +48,14 @@ const VideoController = ({
     <ButtonContainer>
       <Controls>
         <Btn onClick={() => mute("audio")}>
-          {trackState.audio ? "오디오 On" : "오디오 Off"}
+          {audio ? <FaMicrophone /> : <FaMicrophoneSlash />}
         </Btn>
         <Btn onClick={() => mute("video")}>
-          {trackState.video ? "비디오 On" : "비디오 Off"}
+          {video ? <FaVideo /> : <FaVideoSlash />}
         </Btn>
-        <Btn onClick={() => leaveChannel()}>나가기</Btn>
+        <Btn onClick={() => leaveChannel()}>
+          <MdOutlineExitToApp />
+        </Btn>
       </Controls>
     </ButtonContainer>
   );

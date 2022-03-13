@@ -20,7 +20,6 @@ interface DivWithFullscreen extends HTMLDivElement {
 }
 
 const VideoCard = ({ videoTrack, audioTrack }: VideoCardProps): JSX.Element => {
-  const [isSpeak, setIsSpeak] = useState(false);
   const videoRef = useRef<DivWithFullscreen>(null);
 
   function openFullscreen() {
@@ -49,7 +48,6 @@ const VideoCard = ({ videoTrack, audioTrack }: VideoCardProps): JSX.Element => {
           videoTrack={videoTrack}
         />
       )}
-      {isSpeak && <VolumeVisualizer />}
     </VideoWrap>
   );
 };
